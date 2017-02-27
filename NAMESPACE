@@ -2,6 +2,13 @@
 
 export(bootCor)
 export(dScore)
+export(iat_flagError)
+export(iat_flagSpeed)
 export(metaBootCor)
 export(parseEdat)
+export(read_merge)
+export(scoreIAT)
+import(dplyr)
+import(tidyr)
+importFrom(dplyr,"%>%")
 importFrom(dplyr,'%>%')

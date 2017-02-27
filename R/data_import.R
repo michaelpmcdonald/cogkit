@@ -22,7 +22,8 @@ parseEdat <- function(filename){
 #' Read and merge files of a particular type, useful when individual subject
 #' files are saved separately by the experimental software
 #'
-#' @param pattern
+#' @param pattern a regular expression pattern to describe files to import.  Should include
+#' information about the filename as well as its extension
 #' @param ... additional parameters such as column specifications for read_tsv
 #'
 #' @return a single merged files
