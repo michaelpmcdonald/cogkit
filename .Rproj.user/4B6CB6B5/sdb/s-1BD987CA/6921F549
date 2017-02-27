@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Parse ePrime .txt logfile\n#'\n#' @param filename of ePrime logfile.txt\n#'\n#' @return a dataframe from the experiment, with subject number, session number, and date\n#' @export\nparseEdat <- function(filename){\n  # uses edatparser to parse the eprime file, then recovers subject number,\n  # session number, and date, and adds them to the returned dataframe\n  require(edatparser)\n  file <- edatparser::edat(filename)\n  subjectNumber <- edatparser::get_subject_number(file)\n  sessionNumber <- edatparser::get_session(file)\n  sessionDate <- edatparser::get_date(file)\n  fixedData <- as.data.frame(file)\n  fixedData$subject <- subjectNumber\n  fixedData$session <- sessionNumber\n  fixedData$date <- sessionDate\n  return(fixedData)\n}\n\n#' Read and merge files of a particular type, useful when individual subject\n#' files are saved separately by the experimental software\n#'\n#' @param pattern a regular expression pattern to describe files to import.  Should include\n#' information about the filename as well as its extension\n#' @param ... additional parameters such as column specifications for read_tsv\n#'\n#' @return a single merged files\n#' @export\n#'\n#'\n#' @examples pattern=\"ageiat_raw+.*iqdat\"\nread_merge <- function(pattern, ...){\n  filenames <- list.files(pattern)\n  files <- lapply(filenames, readr::read_tsv, ...)\n  file_merged <- files %>% dplyr::bind_rows()\n  return(file_merged)\n}\n",
+    "created" : 1488218184046.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4039206198",
+    "id" : "6921F549",
+    "lastKnownWriteTime" : 1488218226,
+    "last_content_update" : 1488218226651,
+    "path" : "~/tabula/projects/cogkit/R/data_import.R",
+    "project_path" : "R/data_import.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

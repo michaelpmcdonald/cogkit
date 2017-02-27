@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: cogkit\nType: Package\nTitle: Tools for Scoring, Analysis, and Modeling Common Cognitive Tasks\nVersion: 0.1.0\nAuthor: Authors@R: person(\"Michael P.\", \"McDonald\", \n                  email = \"mpmcd@uw.edu\",\n                  role = c(\"aut\", \"cre\"))\nDescription: This package contains functions to support the scoring, analysis, \n    and modeling of common cognitive tasks.\nLicense: GNU-AGPLv3\nEncoding: UTF-8\nLazyData: true\nRoxygenNote: 6.0.1\nImports:\n    dplyr,\n    readr,\n    tidyr\nSuggests:\n    edatparser,\n    forcats\n",
+    "created" : 1488077723559.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1056137213",
+    "id" : "CCCB24DE",
+    "lastKnownWriteTime" : 1488219043,
+    "last_content_update" : 1488219043212,
+    "path" : "~/tabula/projects/cogkit/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}
