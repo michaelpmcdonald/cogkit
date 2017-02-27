@@ -1,0 +1,19 @@
+Package: cogkit
+Type: Package
+Title: Tools for Scoring, Analysis, and Modeling Common Cognitive Tasks
+Version: 0.1.0
+Author: Authors@R: person("Michael P.", "McDonald", 
+                  email = "mpmcd@uw.edu",
+                  role = c("aut", "cre"))
+Description: This package contains functions to support the scoring, analysis, 
+    and modeling of common cognitive tasks.
+License: GNU-AGPLv3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Imports:
+    dplyr
+    readr
+    tidyr
+Suggests:
+    edatparser
