@@ -2,6 +2,7 @@
 
 export(bootCor)
 export(dScore)
+export(expt_score.pss)
 export(iat_flagError)
 export(iat_flagSpeed)
 export(metaBootCor)

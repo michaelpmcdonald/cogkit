@@ -2,7 +2,7 @@ Package: cogkit
 Type: Package
 Title: Tools for Scoring, Analysis, and Modeling Common Cognitive Tasks
 Version: 0.1.0
-Author: Authors@R: person("Michael P.", "McDonald", 
+Authors@R: person("Michael P.", "McDonald", 
                   email = "mpmcd@uw.edu",
                   role = c("aut", "cre"))
 Description: This package contains functions to support the scoring, analysis, 

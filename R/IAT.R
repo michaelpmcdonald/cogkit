@@ -108,8 +108,6 @@ iat_flagSpeed <- function(df, threshold = .3, criterion = .1){
 #' @return dataframe of subject numbers and flag values (true/false)
 #' @export
 #' @importFrom dplyr %>%
-#'
-#' @examples
 iat_flagError <- function(df, criterion){
   flag_data <- df %>%
     dplyr::select(subject, pairing, correct) %>%
