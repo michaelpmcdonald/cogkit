@@ -1,11 +1,11 @@
-Package: cogkit
+Package: noggin
 Type: Package
 Title: Tools for Scoring, Analysis, and Modeling Common Cognitive Tasks
 Version: 0.1.0
 Authors@R: person("Michael P.", "McDonald", 
                   email = "mpmcd@uw.edu",
                   role = c("aut", "cre"))
-Description: This package contains functions to support the scoring, analysis, 
+Description: Contains functions to support the scoring, analysis, 
     and modeling of common cognitive tasks.
 License: AGPL
 Encoding: UTF-8

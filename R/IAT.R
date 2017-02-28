@@ -46,12 +46,12 @@ scoreIAT <- function(df, platform = "inquisit"){
     )
 
   tbl_D_calc_statistics_long <- df %>%
-    select(subject, pairing, latency) %>%
-    group_by(subject, pairing) %>%
-    summarize(mean_latency = mean(latency),
+    dplyr::select(subject, pairing, latency) %>%
+    dplyr::group_by(subject, pairing) %>%
+    dplyr::summarize(mean_latency = mean(latency),
               sd_latency = sd(latency),
-              n_trials = n()) %>%
-    filter(!is.na(pairing) & !is.na(mean_latency) & !is.na(sd_latency) & !is.na(n_trials))
+              n_trials = dplyr::n()) %>%
+    dplyr::filter(!is.na(pairing) & !is.na(mean_latency) & !is.na(sd_latency) & !is.na(n_trials))
   # Separately spread statistics into wide form and rename the variables appropriately
   # (there are better ways to do this, but it's not worth rewriting)
 
