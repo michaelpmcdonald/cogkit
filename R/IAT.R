@@ -27,7 +27,6 @@ dScore <- function(m1, m2, sd1, sd2, n1, n2){
 #' appropriate statistics
 #'
 #' @param df Experimental dataframe.  Must contain columns subject,
-#' @param excludedsubjects a vector of excluded subject numbers
 #' @param platform experimental platform (default = "inquisit")
 #'
 #' @return a list of data.frames
@@ -98,7 +97,6 @@ iat_flagSpeed <- function(df, threshold = .3, criterion = .1){
     dplyr::summarize(meanUnderThreshold = mean(latency <= threshold), # returns proportion under 300ms
                      flag = mean(latency <= threshold) > criterion)
 }
-
 
 #' Flag Error Rate (IAT)
 #'

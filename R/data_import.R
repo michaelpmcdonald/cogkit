@@ -7,7 +7,6 @@
 parseEdat <- function(filename){
   # uses edatparser to parse the eprime file, then recovers subject number,
   # session number, and date, and adds them to the returned dataframe
-  require(edatparser)
   file <- edatparser::edat(filename)
   subjectNumber <- edatparser::get_subject_number(file)
   sessionNumber <- edatparser::get_session(file)

@@ -1,4 +1,4 @@
-#' Title Score a Probabalistic Stimulus Selection task
+#' Score a Probabalistic Stimulus Selection task
 #'
 #' @param df a dataframe
 #' @param platform experimental platform

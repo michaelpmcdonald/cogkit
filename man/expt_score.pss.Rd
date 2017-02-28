@@ -2,7 +2,7 @@
 % Please edit documentation in R/PSS.R
 \name{expt_score.pss}
 \alias{expt_score.pss}
-\title{Title Score a Probabalistic Stimulus Selection task}
+\title{Score a Probabalistic Stimulus Selection task}
 \usage{
 expt_score.pss(df, platform = "eprime")
 }
@@ -15,5 +15,5 @@ expt_score.pss(df, platform = "eprime")
 results
 }
 \description{
-Title Score a Probabalistic Stimulus Selection task
+Score a Probabalistic Stimulus Selection task
 }

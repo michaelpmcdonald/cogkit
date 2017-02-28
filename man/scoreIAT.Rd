@@ -10,8 +10,6 @@ scoreIAT(df, platform = "inquisit")
 \item{df}{Experimental dataframe.  Must contain columns subject,}
 
 \item{platform}{experimental platform (default = "inquisit")}
-
-\item{excludedsubjects}{a vector of excluded subject numbers}
 }
 \value{
 a list of data.frames
