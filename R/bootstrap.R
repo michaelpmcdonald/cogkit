@@ -49,11 +49,12 @@ bootSummary <- function(x, size=10000){
   n <- length(x)
   observedMean <- mean(x, na.rm = TRUE)
   bootSample <- replicate(size, mean(sample(x, n, replace = TRUE)))
-  results <- data.frame("observed" = observedMean,
+  results <- data.frame("observedMean" = observedMean,
                         "n" = n,
                         "median" = stats::median(bootSample),
-                        "lower05" = stats::quantile(bootSample, .05),
-                        "upper95" = stats::quantile(bootSample, .95))
+                        "lower.05" = stats::quantile(bootSample, .05),
+                        "upper.95" = stats::quantile(bootSample, .95),
+                        row.names = "")
   return(results)
 }
 

@@ -15,6 +15,7 @@ Imports:
     dplyr,
     readr,
     tidyr,
+    lubridate,
     stats
 Suggests:
     edatparser,

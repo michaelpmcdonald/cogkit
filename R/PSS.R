@@ -20,10 +20,10 @@ expt_score.pss <- function(df, platform = "eprime"){
     filter(Procedure == "Test")
 
   df$chooseAvoid <- NA
-  df$chooseAvoid <- ifelse(pss_data$TrialType %in% chooseAtrials,
-                           "chooseA", pss_data$chooseAvoid)
-  df$chooseAvoid <- ifelse(pss_data$TrialType %in% avoidBtrials,
-                           "avoidB", pss_data$chooseAvoid)
+  df$chooseAvoid <- ifelse(df$TrialType %in% chooseAtrials,
+                           "chooseA", df$chooseAvoid)
+  df$chooseAvoid <- ifelse(df$TrialType %in% avoidBtrials,
+                           "avoidB", df$chooseAvoid)
 
   results <- df %>%
     group_by(subject, chooseAvoid) %>%
