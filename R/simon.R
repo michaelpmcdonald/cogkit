@@ -6,15 +6,11 @@
 #' @return scored dataframe
 #' @importFrom lubridate day month year
 #' @export
-expt_score.simon <- function(df, excludedSubjects = NA, platform = "inquisit"){
-  ans <- list()
-  ans$raw <- df
-  if (!is.na(excludedSubjects)){
-    df <- dplyr::filter(df, !(subject %in% excludedSubjects))
-  }
-  ans$platform <- platform
-  ans$excludedSubjects <- excludedSubjects
-  class(ans) <- c("simon", "experiment")
+expt_score.simon <- function(df, excludedSubjects, platform, ...){
+  # Set up the expt object
+  expt <- expt_setup(df, excludedSubjects, platform)
+  class(expt) <- c("simon", "experiment")
+
   # Create scored data frame
   scored <- df %>%
     filter(blockcode == "testblock") %>%
@@ -29,15 +25,16 @@ expt_score.simon <- function(df, excludedSubjects = NA, platform = "inquisit"){
     separate(congruent, c("cong_latency", "cong_accuracy", "cong_sd", "cong_n"), sep = "W", convert = TRUE) %>%
     separate(incongruent, c("inc_latency", "inc_accuracy", "inc_sd", "inc_n"), sep = "W", convert = TRUE) %>%
     mutate(t_diff = as.numeric(inc_latency) - as.numeric(cong_latency)) %>%
-    mutate(d = t_diff / sqrt( (cong_sd^2*(cong_n-1) + inc_sd^2*(inc_n-1) / (cong_n + inc_n + 1))))
-  # Add class attribute
+    mutate(d = t_diff / sqrt( (cong_sd^2*(cong_n - 1) + inc_sd^2*(inc_n - 1) / (cong_n + inc_n + 1))))
+
+  # Add attributes
   class(scored) <-  c("simon", class(scored))
   start.date <- min(lubridate::mdy(df$date))
   end.date <- max(lubridate::mdy(df$date))
   attr(scored, "Start date") <- paste(day(start.date), month(start.date), year(start.date), sep = "-")
   attr(scored, "End date") <- paste(day(end.date), month(end.date), year(end.date), sep = "-")
-  ans$scored <- scored
-  return(ans)
+  expt$scored <- scored
+  return(expt)
 }
 
 #' Summary method for Simon task
@@ -87,8 +84,9 @@ summary.simon <- function(x, statmethod = "classical", ...){
 #' @return NA
 print.summary.simon <- function(x, ...){
   collection <- x$collection
-  cat("Data collected between", as.character(collection$begin.date), "and", as.character(collection$end.date), "\n    over", collection$coll.days, "days of collection.\n", sep = " ")
+  cat("Data collected between", as.character(collection$begin.date), "and", as.character(collection$end.date), "\n    across", collection$coll.days, "days of collection.\n", sep = " ")
   cat("Total included subjects: ", collection$subj.count, "\nSubjects per collection day: ", round(collection$subj.perday, 1), "\n\n", sep = "")
   print(attr(x[['descriptives']], 'statmethodstring'))
   print(x[['descriptives']])
 }
+

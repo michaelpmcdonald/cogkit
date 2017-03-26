@@ -4,7 +4,8 @@
 \alias{expt_score.pss}
 \title{Score a Probabalistic Stimulus Selection task}
 \usage{
-\method{expt_score}{pss}(df, platform = "eprime")
+\method{expt_score}{pss}(df, excludedSubjects = NA, platform = "eprime",
+  ...)
 }
 \arguments{
 \item{df}{a dataframe}

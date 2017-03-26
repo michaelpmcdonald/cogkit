@@ -5,7 +5,11 @@
 #'
 #' @return results
 #' @export
-expt_score.pss <- function(df, platform = "eprime"){
+expt_score.pss <- function(df, excludedSubjects = NA, platform = "eprime", ...){
+  # Set up the expt object
+  expt <- expt_setup(df, excludedSubjects, platform)
+  class(expt) <- c("pss", "experiment")
+
   # Need to return:
   # 1. Choose A accuracy
   # 2. Avoid B accuracy
@@ -25,12 +29,12 @@ expt_score.pss <- function(df, platform = "eprime"){
   df$chooseAvoid <- ifelse(df$TrialType %in% avoidBtrials,
                            "avoidB", df$chooseAvoid)
 
-  results <- df %>%
+  expt$scored <- df %>%
     group_by(subject, chooseAvoid) %>%
     summarise(accuracy = mean(as.numeric(StimulusPresentation2.ACC), na.rm=TRUE),
               n_trials = n()) %>%
     select(subject, chooseAvoid, accuracy) %>%
     filter(!is.na(chooseAvoid)) %>%
     spread(chooseAvoid, accuracy)
-  return(results)
+  return(expt)
 }

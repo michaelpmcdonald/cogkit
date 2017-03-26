@@ -1,0 +1,34 @@
+---
+title: "Simon test"
+author: "Michael P. McDonald"
+date: "3/20/2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup}
+library(noggin)
+load('testdata/ISIP_raw.Rdata')
+
+# Raw experiment file
+head(simon)
+
+# Score the experiment and store it to object "td"
+td <- scoreExpt(simon, type = "simon")
+
+
+# Summarize
+summary(td)
+
+# Summarize with bootstrapping
+summary(td, statmethod = "bootstrap")
+
+# Extract the scored dataframe
+scored <- td$scored  # or td[['scored']]
+head(scored)
+
+# Experiment objects also retain their raw data
+head(td$raw)
+
+```

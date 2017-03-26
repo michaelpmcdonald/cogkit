@@ -10,7 +10,12 @@
 #' @export
 #' @import dplyr
 #' @import tidyr
-expt_score.IAT <- function(df, platform = "inquisit"){
+expt_score.iat <- function(df, excludedSubjects = NA, platform = "inquisit", ...){
+  # Set up the expt object
+  expt <- expt_setup(df, excludedSubjects, platform)
+  class(expt) <- c("iat", "experiment")
+
+  # Recode factors in a way that's easier to use
   df <- df %>%
     dplyr::mutate(pairing = forcats::fct_recode(blockcode,
                                                 "1" = "attributepractice",
@@ -26,9 +31,9 @@ expt_score.IAT <- function(df, platform = "inquisit"){
     dplyr::select(subject, pairing, latency, correct) %>%
     dplyr::group_by(subject, pairing) %>%
     dplyr::summarize(mean_latency = mean(latency),
-              sd_latency = sd(latency),
-              acc = mean(correct, na.rm = TRUE),
-              n_trials = n()) %>%
+                     sd_latency = sd(latency),
+                     acc = mean(correct, na.rm = TRUE),
+                     n_trials = n()) %>%
     dplyr::filter(!is.na(pairing) & !is.na(mean_latency) & !is.na(sd_latency) & !is.na(n_trials))
   # Separately spread statistics into wide form and rename the variables appropriately
   # (there are better ways to do this, but it's not worth rewriting)
@@ -58,7 +63,9 @@ expt_score.IAT <- function(df, platform = "inquisit"){
 
   tbl_D_calc_statistics$meanLat <- with(tbl_D_calc_statistics, (lat3+lat4+lat6+lat7)/4)
 
-  return(data.frame(tbl_D_calc_statistics))
+  expt$scored <- data.frame(tbl_D_calc_statistics)
+
+  return(expt)
 }
 
 #' Calculate a D score based on vectors of means, SDs, and Ns
@@ -132,8 +139,8 @@ iat_findOrder <- function(df){
   results <- df %>%
     dplyr::filter(blocknum == 3 & trialnum == 2) %>%
     dplyr::mutate(order = forcats::fct_recode(blockcode,
-                                                "compatiblefirst" = "compatibletest1",
-                                                'incompatiblefirst' = "incompatibletest1")) %>%
+                                              "compatiblefirst" = "compatibletest1",
+                                              'incompatiblefirst' = "incompatibletest1")) %>%
     dplyr::select(subject, order)
   return(results)
 }
