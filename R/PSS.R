@@ -29,12 +29,19 @@ expt_score.pss <- function(df, excludedSubjects = NA, platform = "eprime", ...){
   df$chooseAvoid <- ifelse(df$TrialType %in% avoidBtrials,
                            "avoidB", df$chooseAvoid)
 
-  expt$scored <- df %>%
+  overallAccuracy <- df %>%
+    select(subject, StimulusPresentation2.ACC) %>%
+    group_by(subject) %>%
+    summarize(overallAccuracy = mean(as.numeric(StimulusPresentation2.ACC), na.rm = TRUE))
+
+  results <- df %>%
     group_by(subject, chooseAvoid) %>%
-    summarise(accuracy = mean(as.numeric(StimulusPresentation2.ACC), na.rm=TRUE),
+    summarise(accuracy = mean(as.numeric(StimulusPresentation2.ACC), na.rm = TRUE),
               n_trials = n()) %>%
     select(subject, chooseAvoid, accuracy) %>%
     filter(!is.na(chooseAvoid)) %>%
-    spread(chooseAvoid, accuracy)
-  return(expt)
+    spread(chooseAvoid, accuracy) %>%
+    left_join(overallAccuracy)
+
+  return(results)
 }
