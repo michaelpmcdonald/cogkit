@@ -6,7 +6,7 @@
 #'
 #' @return NA - referrer function
 #' @export
-scoreExpt <- function(df, type, excludedSubjects = NA, platform, ...){
+scoreExpt <- function(df, type, excludedSubjects = NA, platform = "default", ...){
   class(df) <- c(class(df), type)
   expt_score(df, excludedSubjects, platform, ...)
 }
