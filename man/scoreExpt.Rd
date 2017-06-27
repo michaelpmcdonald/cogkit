@@ -4,7 +4,7 @@
 \alias{scoreExpt}
 \title{Score Experiment}
 \usage{
-scoreExpt(df, type, ...)
+scoreExpt(df, type, excludedSubjects = NA, platform = "default", ...)
 }
 \arguments{
 \item{df}{Dataframe containing experimental data produced by an experiment presentation software}

@@ -4,7 +4,7 @@
 \alias{expt_score}
 \title{Generic scoring function helper}
 \usage{
-expt_score(df, ...)
+expt_score(df, excludedSubjects, platform, ...)
 }
 \arguments{
 \item{df}{}

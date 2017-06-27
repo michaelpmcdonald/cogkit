@@ -4,8 +4,7 @@
 \alias{expt_score.simon}
 \title{Score Simon Task}
 \usage{
-\method{expt_score}{simon}(df, excludedSubjects = NA, platform = "inquisit",
-  ...)
+\method{expt_score}{simon}(df, excludedSubjects, platform, ...)
 }
 \arguments{
 \item{df}{raw dataframe from experimental platform}

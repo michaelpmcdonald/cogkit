@@ -20,7 +20,7 @@ scoreExpt <- function(df, type, excludedSubjects = NA, platform = "default", ...
 expt_score <- function(df, excludedSubjects, platform, ...) {UseMethod("expt_score")}
 
 expt_score.default <- function(df, ...){
-  print("Can't score a generic.")
+  print("Can't expt_score a generic.")
 }
 
 #' Setup the experiment object returned by scoring routines
@@ -36,4 +36,10 @@ expt_setup <- function(df, excludedSubjects, platform){
   expt$platform <- platform
   expt$excludedSubjects <- excludedSubjects
   return(expt)
+}
+
+expt_flag <- function(df, ...) {UseMethod("expt_flag")}
+
+expt_flag.default <- function(df, ...){
+  print("Can't expt_flag a generic.")
 }

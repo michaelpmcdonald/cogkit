@@ -11,11 +11,17 @@ expt_score.simon <- function(df, excludedSubjects, platform, ...){
   expt <- expt_setup(df, excludedSubjects, platform)
   class(expt) <- c("simon", "experiment")
 
+  # Create a new vector that represents the type of the preceding trial
+  previous_type <- df$values.congruence[-1]
+  previous_type <- append(previous_type, NA)
+  df$previous_type <- previous_type
+  df <- filter(df, !(blockcode == "testblock" & trialnum == 29))
+
   # Create scored data frame
   scored <- df %>%
     filter(blockcode == "testblock") %>%
-    select(subject, values.congruence, latency, correct) %>%
-    group_by(subject, values.congruence) %>%
+    select(subject, values.congruence, previous_type, latency, correct) %>%
+    group_by(subject, values.congruence, previous_type) %>%
     summarize(mean_latency = mean(latency),
               accuracy = mean(correct),
               sd_lat = sd(latency),

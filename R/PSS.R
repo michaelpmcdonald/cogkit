@@ -34,7 +34,7 @@ expt_score.pss <- function(df, excludedSubjects = NA, platform = "eprime", ...){
     group_by(subject) %>%
     summarize(overallAccuracy = mean(as.numeric(StimulusPresentation2.ACC), na.rm = TRUE))
 
-  results <- df %>%
+  expt$scored <- df %>%
     group_by(subject, chooseAvoid) %>%
     summarise(accuracy = mean(as.numeric(StimulusPresentation2.ACC), na.rm = TRUE),
               n_trials = n()) %>%
@@ -43,5 +43,5 @@ expt_score.pss <- function(df, excludedSubjects = NA, platform = "eprime", ...){
     spread(chooseAvoid, accuracy) %>%
     left_join(overallAccuracy)
 
-  return(results)
+  return(expt)
 }

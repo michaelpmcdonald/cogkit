@@ -65,8 +65,17 @@ expt_score.iat <- function(df, excludedSubjects = NA, platform = "inquisit", ...
 
   expt$scored <- data.frame(tbl_D_calc_statistics)
 
+  # Determine exclusion flags
+  speed_flag <- iat_flagSpeed(df) %>% mutate(speed = flag)
+  error_flag <- iat_flagError(df, .4) %>% mutate(error = flag)
+  flags <- speed_flag %>% left_join(., error_flag)
+  expt$flags <- flags
+
+
   return(expt)
 }
+
+expt_flag.iat <- function(df, platform)
 
 #' Calculate a D score based on vectors of means, SDs, and Ns
 #'
