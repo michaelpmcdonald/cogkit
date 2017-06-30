@@ -66,16 +66,14 @@ expt_score.iat <- function(df, excludedSubjects = NA, platform = "inquisit", ...
   expt$scored <- data.frame(tbl_D_calc_statistics)
 
   # Determine exclusion flags
-  speed_flag <- iat_flagSpeed(df) %>% mutate(speed = flag)
-  error_flag <- iat_flagError(df, .4) %>% mutate(error = flag)
+  speed_flag <- iat_flagSpeed(df)
+  error_flag <- iat_flagError(df, .4)
   flags <- speed_flag %>% left_join(., error_flag)
   expt$flags <- flags
 
 
   return(expt)
 }
-
-expt_flag.iat <- function(df, platform)
 
 #' Calculate a D score based on vectors of means, SDs, and Ns
 #'
@@ -116,7 +114,7 @@ iat_flagSpeed <- function(df, threshold = .3, criterion = .1){
     dplyr::filter(pairing %in% c("3","4","6","7")) %>% # only examine in paired blocks
     dplyr::group_by(subject) %>%
     dplyr::summarize(meanUnderThreshold = mean(latency <= threshold), # returns proportion under 300ms
-                     flag = mean(latency <= threshold) > criterion)
+                     speed_flag = mean(latency <= threshold) > criterion)
 }
 
 #' Flag Error Rate (IAT)
@@ -133,7 +131,8 @@ iat_flagError <- function(df, criterion){
     dplyr::group_by(subject, pairing) %>%
     dplyr::summarize(error_rate = mean(1 - correct)) %>%
     dplyr::group_by(subject) %>%
-    dplyr::summarize(flag = max(error_rate) >= criterion)
+    dplyr::summarize(error_rate = mean(error_rate),
+                     error_flag = max(error_rate) >= criterion)
   return(flag_data)
 }
 
