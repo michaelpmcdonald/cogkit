@@ -1,13 +1,12 @@
 #' Score a Probabalistic Stimulus Selection task
 #'
-#' @param df a dataframe
+#' @param experiment a dataframe
 #' @param platform experimental platform
 #'
 #' @return results
 #' @export
-expt_score.pss <- function(df, excludedSubjects = NA, platform = "eprime", ...){
+score.pss <- function(experiment, excludedSubjects = NA, platform = "eprime", ...){
   # Set up the expt object
-  expt <- expt_setup(df, excludedSubjects, platform)
   class(expt) <- c("pss", "experiment")
 
   # Need to return:

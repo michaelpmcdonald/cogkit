@@ -30,8 +30,8 @@ bootCor <- function(X, Y, size = 10000){
 metaBootCor <- function(X, Y, size=10000){
   results <- bootCor(X, Y, size) %>%
     dplyr::summarize(observed_r = max(observed, na.rm=TRUE),
-              lower05 = stats::quantile(estimate, .05, na.rm=TRUE),
-              upper95 = stats::quantile(estimate, .95, na.rm=TRUE))
+              lower025 = stats::quantile(estimate, .025, na.rm=TRUE),
+              upper975 = stats::quantile(estimate, .975, na.rm=TRUE))
   return(results)
 }
 
@@ -49,13 +49,18 @@ bootSummary <- function(x, size=10000){
   n <- length(x)
   observedMean <- mean(x, na.rm = TRUE)
   bootSample <- replicate(size, mean(sample(x, n, replace = TRUE)))
+  bootSDSample <- replicate(size, sd(sample(x, n, replace = TRUE)))
   results <- data.frame("observedMean" = observedMean,
                         "n" = n,
                         "median" = stats::median(bootSample),
-                        "lower.05" = stats::quantile(bootSample, .05),
-                        "upper.95" = stats::quantile(bootSample, .95),
+                        "lower.025" = stats::quantile(bootSample, .025),
+                        "upper.975" = stats::quantile(bootSample, .975),
+                        "sample.SD.median" = stats::median(bootSDSample),
+                        "sample.SD.lower025" = stats::quantile(bootSDSample, .025),
+                        "sample.SD.upper975" = stats::quantile(bootSDSample, .975),
                         row.names = "")
   return(results)
 }
+
 
 

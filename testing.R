@@ -1,6 +1,11 @@
-load('testdata/ISIP_raw.Rdata')
+load('data/testdata.Rdata')
 
 excludedSubjects <- c(1, 902, 903, 904, 910, 913, 914, 999)
+
+
+
+
+
 
 
 simon2 <- simon
